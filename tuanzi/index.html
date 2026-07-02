@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>团子经 · 团子是天</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #fef9f0 0%, #fff6e5 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', system-ui, -apple-system, sans-serif;
+      padding: 20px;
+    }
+
+    /* 主卡片 — 团子圣典 */
+    .tuanzi-sutra {
+      max-width: 700px;
+      width: 100%;
+      background: #ffffffdd;
+      backdrop-filter: blur(6px);
+      background: rgba(255, 248, 240, 0.85);
+      border-radius: 64px 48px 64px 48px;
+      box-shadow: 0 20px 40px rgba(210, 150, 100, 0.2),
+                  0 8px 16px rgba(180, 120, 70, 0.1),
+                  inset 0 2px 4px rgba(255, 245, 230, 0.8);
+      padding: 36px 32px 42px;
+      border: 2px solid #ffdbb5;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    /* 装饰小团子 */
+    .tuanzi-deco {
+      position: absolute;
+      top: -18px;
+      left: 30px;
+      background: #ffb07c;
+      color: #fff4e0;
+      font-size: 28px;
+      line-height: 1;
+      padding: 10px 22px 8px 22px;
+      border-radius: 80px 40px 40px 80px;
+      box-shadow: 0 6px 0 #c47a4e, 0 8px 16px rgba(160, 90, 40, 0.2);
+      transform: rotate(-2deg);
+      letter-spacing: 2px;
+      font-weight: 700;
+      border: 2px solid #ffd09a;
+      text-shadow: 0 2px 0 #a76030;
+    }
+
+    .tuanzi-deco span {
+      display: inline-block;
+      transform: scaleX(-1);
+      margin-right: 2px;
+    }
+
+    /* 标题 */
+    .sutra-header {
+      margin-top: 18px;
+      margin-bottom: 28px;
+      border-bottom: 4px dotted #efc9a0;
+      padding-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .sutra-title {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: #7a4a2a;
+      letter-spacing: 2px;
+      text-shadow: 3px 3px 0 #f7dcc0;
+      background: #fce8d4;
+      display: inline-block;
+      padding: 0 28px 0 16px;
+      border-radius: 120px 30px 30px 120px;
+      line-height: 1.3;
+      transform: rotate(-0.5deg);
+      border: 2px solid #dba578;
+    }
+
+    .sutra-sub {
+      font-size: 1.0rem;
+      background: #b47d5a;
+      color: #fff3e0;
+      padding: 6px 20px;
+      border-radius: 60px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      box-shadow: inset 0 -3px 0 #6d4a2e;
+      border: 1px solid #dba070;
+      margin-top: 6px;
+    }
+
+    /* 信条列表 */
+    .commandments {
+      list-style: none;
+      margin: 28px 0 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .commandment-item {
+      background: #fffaf2;
+      padding: 16px 26px 16px 26px;
+      border-radius: 80px 20px 20px 80px;
+      border-left: 12px solid #f3b48c;
+      box-shadow: 0 6px 0 #d9b494, 0 6px 12px rgba(160, 100, 60, 0.12);
+      font-size: 1.15rem;
+      font-weight: 550;
+      color: #3f2c1c;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.1s ease;
+      border: 1px solid #efcfb0;
+      word-break: break-word;
+      line-height: 1.5;
+    }
+
+    .commandment-item::before {
+      content: "🍡";
+      font-size: 1.8rem;
+      margin-right: 14px;
+      filter: drop-shadow(0 3px 3px rgba(180, 100, 40, 0.2));
+      flex-shrink: 0;
+    }
+
+    .commandment-item strong {
+      background: #fae1cd;
+      padding: 0 12px;
+      border-radius: 40px;
+      font-weight: 700;
+      color: #683f20;
+      margin: 0 4px;
+      white-space: nowrap;
+    }
+
+    .commandment-item .highlight {
+      background: #fcd5b0;
+      border-radius: 30px;
+      padding: 0 12px;
+      font-weight: 700;
+      color: #5f3a1e;
+    }
+
+    /* 宗旨 */
+    .creed-box {
+      background: #ffe3cd;
+      border-radius: 100px 30px 100px 30px;
+      padding: 18px 28px;
+      margin: 28px 0 18px;
+      border: 3px solid #f7c8a6;
+      box-shadow: inset 0 2px 6px #fbeddc, 0 10px 18px rgba(200, 130, 70, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+    }
+
+    .creed-text {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #522f18;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 0 #fadbc0;
+    }
+
+    .creed-text small {
+      font-size: 1.2rem;
+      font-weight: 400;
+      background: #b77b54;
+      color: #fff5e6;
+      padding: 0 20px;
+      border-radius: 60px;
+      line-height: 2;
+      margin-left: 6px;
+      box-shadow: inset 0 -3px 0 #5f3b22;
+      border: 1px solid #c48758;
+    }
+
+    /* 团子认证 */
+    .tuanzi-seal {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 12px;
+      font-size: 0.95rem;
+      color: #b27c5a;
+      font-weight: 500;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tuanzi-seal span {
+      background: #f2dcc8;
+      padding: 6px 18px;
+      border-radius: 60px;
+      border: 1px solid #dbb48c;
+      color: #543a26;
+    }
+
+    .tuanzi-seal .emoji-big {
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    /* 点赞按钮 (趣味互动) */
+    .like-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 20px 0 8px;
+      flex-wrap: wrap;
+    }
+
+    .like-btn {
+      background: #fcd1b0;
+      border: 3px solid #dba07a;
+      color: #482e1a;
+      font-size: 1.2rem;
+      font-weight: 700;
+      padding: 12px 32px;
+      border-radius: 80px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 0 #b57b56, 0 6px 12px rgba(140, 80, 30, 0.2);
+      transition: all 0.07s ease-in;
+      cursor: pointer;
+      background: #ffe3cd;
+      letter-spacing: 1px;
+    }
+
+    .like-btn:active {
+      transform: translateY(6px);
+      box-shadow: 0 2px 0 #b57b56;
+    }
+
+    .like-btn .heart {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    #likeCounter {
+      background: #fae0cc;
+      border-radius: 60px;
+      padding: 0 18px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #683e20;
+      border: 2px solid #dba070;
+      line-height: 2.2;
+      min-width: 70px;
+      text-align: center;
+    }
+
+    .footnote {
+      text-align: center;
+      color: #aa7b5a;
+      font-size: 0.9rem;
+      margin-top: 28px;
+      border-top: 2px dashed #eacbb0;
+      padding-top: 20px;
+      letter-spacing: 0.4px;
+    }
+
+    .footnote i {
+      font-style: normal;
+      background: #f7e1cf;
+      padding: 0 8px;
+      border-radius: 20px;
+      color: #583c28;
+    }
+
+    /* 响应式 */
+    @media (max-width: 550px) {
+      .tuanzi-sutra {
+        padding: 28px 16px 30px;
+        border-radius: 40px 28px 40px 28px;
+      }
+      .sutra-title {
+        font-size: 2.0rem;
+        padding: 0 16px 0 12px;
+      }
+      .commandment-item {
+        font-size: 1.0rem;
+        padding: 14px 14px 14px 18px;
+        border-left-width: 8px;
+        border-radius: 40px 12px 12px 40px;
+      }
+      .commandment-item::before {
+        font-size: 1.5rem;
+        margin-right: 8px;
+      }
+      .creed-text {
+        font-size: 1.4rem;
+      }
+      .creed-text small {
+        font-size: 1rem;
+      }
+      .tuanzi-deco {
+        font-size: 20px;
+        padding: 6px 16px 4px 16px;
+        top: -14px;
+        left: 16px;
+      }
+      .like-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+      }
+      #likeCounter {
+        min-width: 56px;
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .sutra-title {
+        font-size: 1.7rem;
+      }
+      .commandment-item {
+        font-size: 0.95rem;
+        padding: 12px 10px 12px 14px;
+      }
+    }
+
+    /* 小点缀：团子爪印 */
+    .paw-print {
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23eaceb0" opacity="0.3"><circle cx="6" cy="6" r="4"/><circle cx="18" cy="6" r="4"/><circle cx="3" cy="16" r="4.5"/><circle cx="12" cy="20" r="5"/><circle cx="21" cy="16" r="4.5"/></svg>');
+      background-size: 40px 40px;
+      width: 40px;
+      height: 40px;
+      opacity: 0.3;
+      display: inline-block;
+      margin-left: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="tuanzi-sutra">
+    <!-- 顶部装饰 -->
+    <div class="tuanzi-deco">
+      <span>🐼</span> 团子·经
+    </div>
+
+    <!-- 标题区 -->
+    <div class="sutra-header">
+      <h1 class="sutra-title">🍡 团子是天</h1>
+      <div class="sutra-sub">🐾 团子最大</div>
+    </div>
+
+    <!-- 十条团子律 -->
+    <ul class="commandments">
+      <li class="commandment-item"><strong>1.</strong> 团子是天</li>
+      <li class="commandment-item"><strong>2.</strong> 不可辱骂团子</li>
+      <li class="commandment-item"><strong>3.</strong> 必须点赞团子每一条动态</li>
+      <li class="commandment-item"><strong>4.</strong> 必须主动频繁的给团子发消息</li>
+      <li class="commandment-item"><strong>5.</strong> 必须要细心的照顾好团子小情绪</li>
+      <li class="commandment-item"><strong>6.</strong> 不许和团子玩欲擒故纵吊着团子让团子胡思乱想了</li>
+      <li class="commandment-item"><strong>7.</strong> 不能跟其他人讲话忽视掉团子</li>
+      <li class="commandment-item"><strong>8.</strong> 不能跟团子大吼大叫</li>
+      <li class="commandment-item"><strong>9.</strong> 永远记住团子是最帅的</li>
+    </ul>
+
+    <!-- 宗旨 -->
+    <div class="creed-box">
+      <span class="creed-text">
+        🐼 我们的宗旨：<small>团子是天 团子最大</small>
+      </span>
+    </div>
+
+    <!-- 点赞互动 + 计数器 (致敬第三条) -->
+    <div class="like-section">
+      <span style="font-weight: 600; color: #6f4428; background: #fce3d0; padding: 4px 20px; border-radius: 60px; border: 1px solid #dba87a;">
+        👍 点赞团子
+      </span>
+      <div class="like-btn" id="likeBtn">
+        <span class="heart">❤️</span> 点赞动态
+      </div>
+      <span id="likeCounter">0</span>
+    </div>
+
+    <!-- 团子认证 + 可爱信息 -->
+    <div class="tuanzi-seal">
+      <span class="emoji-big">🐼✨</span>
+      <span>#团子是天</span>
+      <span>#团子最帅</span>
+      <span class="paw-print"></span>
+    </div>
+
+    <!-- 脚注 ～ 团子护体 -->
+    <div class="footnote">
+      <i>🍡 团子经 · 每日诵读</i> &nbsp; ｜ &nbsp; 团子永不为奴 <span style="display: inline-block; transform: rotate(8deg);">🐾</span>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ---------- 第三条 · 必须点赞团子每一条动态 ----------
+      // 用计数器模拟 “点赞动态” 互动，并且每次点赞都会增加。
+      const likeBtn = document.getElementById('likeBtn');
+      const counterSpan = document.getElementById('likeCounter');
+
+      // 从 localStorage 读取点赞数（保持记忆）
+      let likeCount = 0;
+      const STORAGE_KEY = 'tuanzi_like_count';
+
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored !== null) {
+          const parsed = parseInt(stored, 10);
+          if (!isNaN(parsed) && parsed >= 0) {
+            likeCount = parsed;
+          }
+        }
+      } catch (e) {
+        // 忽略
+      }
+
+      // 更新显示
+      function updateCounterDisplay() {
+        counterSpan.textContent = likeCount;
+        // 存回 localStorage
+        try {
+          localStorage.setItem(STORAGE_KEY, String(likeCount));
+        } catch (e) {}
+      }
+
+      // 点赞事件
+      function handleLike() {
+        likeCount += 1;
+        updateCounterDisplay();
+
+        // 给一个小小的视觉反馈（弹跳）
+        likeBtn.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          likeBtn.style.transform = '';
+        }, 100);
+
+        // 额外彩蛋：如果点赞数达到特定值，显示小团子喜悦
+        if (likeCount % 10 === 0 && likeCount > 0) {
+          const msgs = ['🍡 团子感到幸福！', '🐼 团子欣慰点头', '✨ 团子发光了', '🌸 团子很开心'];
+          const msg = msgs[Math.floor(Math.random() * msgs.length)];
+          // 临时显示在计数器旁边
+          const oldText = counterSpan.textContent;
+          counterSpan.textContent = msg;
+          setTimeout(() => {
+            counterSpan.textContent = oldText;
+          }, 1200);
+        }
+      }
+
+      likeBtn.addEventListener('click', handleLike);
+
+      // 初始化显示
+      updateCounterDisplay();
+
+      // 另外，对“必须主动频繁的给团子发消息”这一条，我们也可以加一个模拟提示（非强制，趣味）
+      // 在页面加载后，如果用户一段时间没点击，出现可爱提示（但不会打扰）
+      let tipTimer = null;
+      let tipShown = false;
+
+      function showFriendlyReminder() {
+        if (tipShown) return;
+        tipShown = true;
+        // 在脚注附近显示小提醒（纯趣味）
+        const footnote = document.querySelector('.footnote');
+        if (footnote) {
+          const reminder = document.createElement('span');
+          reminder.style.cssText = 'display:inline-block; margin-left: 12px; background: #fadac0; padding: 2px 14px; border-radius: 40px; font-size: 0.9rem; color: #4f321e; border: 1px solid #dba87a;';
+          reminder.textContent = '💬 主动给团子发消息~';
+          footnote.appendChild(reminder);
+          // 3秒后淡出
+          setTimeout(() => {
+            reminder.style.transition = 'opacity 1s';
+            reminder.style.opacity = '0';
+            setTimeout(() => {
+              if (reminder.parentNode) reminder.remove();
+            }, 1000);
+          }, 4000);
+        }
+      }
+
+      // 如果用户 18 秒没有点击任何地方，显示提示 (但不要骚扰)
+      function resetTipTimer() {
+        if (tipTimer) {
+          clearTimeout(tipTimer);
+          tipTimer = null;
+        }
+        tipShown = false; // 允许再次触发
+        tipTimer = setTimeout(() => {
+          showFriendlyReminder();
+          tipTimer = null;
+        }, 18000);
+      }
+
+      // 用户点击页面任意位置重置计时器，这样不会频繁打扰
+      document.addEventListener('click', function() {
+        resetTipTimer();
+      });
+
+      // 初次启动计时器
+      resetTipTimer();
+
+      // 另外，在控制台输出团子警句
+      console.log('🍡 团子是天，团子最大。 记住：必须点赞团子每一条动态！');
+    })();
+  </script>
+</body>
+</html>
